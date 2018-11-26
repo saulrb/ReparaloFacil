@@ -1,6 +1,6 @@
 package com.facil.reparalo.reparalofacil.models;
 
-public class TokenModel {
+public class AccessTokenModel {
     String jwt;
 
     public String getJwt() {

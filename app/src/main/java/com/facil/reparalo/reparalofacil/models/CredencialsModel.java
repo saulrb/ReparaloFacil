@@ -1,6 +1,7 @@
 package com.facil.reparalo.reparalofacil.models;
 
 public class CredencialsModel {
+
     private String email;
     private String password;
 

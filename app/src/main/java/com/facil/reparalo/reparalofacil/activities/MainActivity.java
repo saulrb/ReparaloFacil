@@ -12,17 +12,19 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+
+import android.widget.Switch;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 
 import com.facil.reparalo.reparalofacil.R;
 import com.facil.reparalo.reparalofacil.dagger.MainApplication;
+import com.facil.reparalo.reparalofacil.models.AccessTokenModel;
 import com.facil.reparalo.reparalofacil.models.AuthenticationModel;
 import com.facil.reparalo.reparalofacil.models.CredencialsModel;
-import com.facil.reparalo.reparalofacil.models.TokenModel;
 import com.facil.reparalo.reparalofacil.network.services.AuthenticationService;
+import com.facil.reparalo.reparalofacil.preferences.services.PreferencesService;
 
 import javax.inject.Inject;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText password;
     Button buttonSingin;
     FloatingActionButton fActionButtonRegister;
+    Switch rememberme ;
     static final int REQUEST_CODE_REGISTRAR = 1;
     static final int REQUEST_CODE_RECUPERAR = 2;
 
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Inject
     AuthenticationService authenticationService;
 
+    @Inject
+    PreferencesService preferencesService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +61,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((MainApplication)getApplication())
                 .getMainActivityComponent()
                 .inject(this);
-
         mapViewComponents();
+    }
 
+    @Override
+    protected void onPostResume() {
+        getSettingsFromPreferences();
+        super.onPostResume();
     }
 
     private void mapViewComponents(){
@@ -66,10 +76,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         password = findViewById(R.id.password);
         buttonSingin = findViewById(R.id.buttonSingin);
         fActionButtonRegister = findViewById(R.id.fActionButtonRegister);
+        rememberme = findViewById(R.id.swRememberme);
+        rememberme.setOnClickListener(this);
         buttonSingin.setOnClickListener(this);
         fActionButtonRegister.setOnClickListener(this);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSettingsFromPreferences();
     }
 
     @Override
@@ -81,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.fActionButtonRegister:
                 registerUser();
                 break;
+            case R.id.swRememberme:
+                preferencesService.saveRememberMe(rememberme.isChecked());
+                if (!rememberme.isChecked()) preferencesService.clearCredentials();
+                break;
         }
     }
 
@@ -89,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CredencialsModel credencialsModel = new CredencialsModel()
                 .setEmail(email.getText().toString())
                 .setPassword(password.getText().toString());
+        if (rememberme.isChecked()) preferencesService.saveCredentials(credencialsModel);
         AuthenticationModel authModel= new AuthenticationModel()
                 .setAuth(credencialsModel);
         compositeDisposable = new CompositeDisposable();
@@ -96,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError));
-        Toast.makeText(MainActivity.this,"Triggered get token" ,Toast.LENGTH_SHORT).show();
     }
 
     private void registerUser(){
@@ -104,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(intent,REQUEST_CODE_REGISTRAR);
     }
 
-    private void handleResponse(TokenModel tokenModel){
+    private void handleResponse(AccessTokenModel tokenModel){
         Toast.makeText(this,"Token:" + tokenModel.getJwt() ,Toast.LENGTH_SHORT).show();
         showProgress(false);
     }
@@ -136,6 +153,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             loginProgress.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    private void getSettingsFromPreferences(){
+        rememberme.setChecked(preferencesService.getRememberMe());
+        if (rememberme.isChecked()) {
+            CredencialsModel credencialsModel = preferencesService.getCredentials();
+            if (credencialsModel.getEmail() != null && !credencialsModel.getEmail().isEmpty()) {
+                email.setText(credencialsModel.getEmail());
+                password.setText(credencialsModel.getPassword());
+            }
         }
     }
 }
