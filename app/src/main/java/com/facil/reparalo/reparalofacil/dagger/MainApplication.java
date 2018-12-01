@@ -7,18 +7,21 @@ import android.app.Application;
 import com.facil.reparalo.reparalofacil.dagger.components.DaggerMainActivityComponent;
 import com.facil.reparalo.reparalofacil.dagger.components.DaggerNetworkComponent;
 import com.facil.reparalo.reparalofacil.dagger.components.DaggerPreferencesComponent;
+import com.facil.reparalo.reparalofacil.dagger.components.DaggerRegisterActivityComponent;
 import com.facil.reparalo.reparalofacil.dagger.components.MainActivityComponent;
 import com.facil.reparalo.reparalofacil.dagger.components.NetworkComponent;
 import com.facil.reparalo.reparalofacil.dagger.components.PreferencesComponent;
+import com.facil.reparalo.reparalofacil.dagger.components.RegisterActivityComponent;
 import com.facil.reparalo.reparalofacil.dagger.modules.ContextModule;
 import com.facil.reparalo.reparalofacil.dagger.modules.NetworkModule;
 import com.facil.reparalo.reparalofacil.dagger.modules.OkHttpClientModule;
 import com.facil.reparalo.reparalofacil.dagger.modules.PreferencesModule;
 
-public class MainApplication extends Application {
+public class MainApplication extends Application   {
 
 
     private MainActivityComponent mainActivityComponent;
+    private RegisterActivityComponent registerActivityComponent;
     private NetworkComponent networkComponent;
     private PreferencesComponent  preferencesComponent;
     private ContextModule contextModule;
@@ -44,9 +47,13 @@ public class MainApplication extends Application {
                 .networkComponent(networkComponent)
                 .preferencesComponent(preferencesComponent)
                 .build();
+        registerActivityComponent = DaggerRegisterActivityComponent.builder()
+                .networkComponent(networkComponent).preferencesComponent(preferencesComponent).build();
     }
 
     public MainActivityComponent getMainActivityComponent() {
         return mainActivityComponent;
     }
+
+    public RegisterActivityComponent getRegisterActivityComponent() {return registerActivityComponent; }
 }

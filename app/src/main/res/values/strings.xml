@@ -2,26 +2,20 @@
     <string name="app_name">Electrodomesticos</string>
     <string name="app_logo">Application Logo</string>
     <string name="sign_in">Ingresar con tus datos</string>
-    <string name="email">Correo Electrónico</string>
-    <string name="password">Contraseña</string>
-    <string name="register">Registrarme</string>
     <string name="singing_in">Entrar</string>
     <string name="rememberme">Recuerdame</string>
     <string name="title_activity_register">Registro</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Correo</string>
+    <string name="prompt_username">Nombre de usuario</string>
     <string name="prompt_password">Contraseña</string>
     <string name="prompt_password_confirm">Confirmar contraseña</string>
-    <string name="action_sign_in">Acceder o registrarse</string>
     <string name="action_sign_up">Registrarse </string>
     <string name="action_sign_in_short">Acceder</string>
+    <string name="error_invalid_username">El nombre de usuario debe ser mayor a 8 caracteres</string>
     <string name="error_invalid_email">Este correo electronico es invalido</string>
     <string name="error_invalid_password">La contraseña es muy pequeña</string>
-    <string name="error_incorrect_password">La combinacion de correo y contraseña es erronea</string>
     <string name="error_field_required">Este campo es requerido</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
@@ -69,20 +63,6 @@
         <item>360</item>
         <item>-1</item>
     </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
 

@@ -121,6 +121,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(intent,REQUEST_CODE_REGISTRAR);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_OK){
+            Bundle params = data.getExtras();
+            if (requestCode == REQUEST_CODE_REGISTRAR) {
+                password.setText(params.getString("password"));
+                email.setText(params.getString("email"));
+            }
+        }
+    }
+
     private void handleResponse(AccessTokenModel tokenModel){
         Toast.makeText(this,"Token:" + tokenModel.getJwt() ,Toast.LENGTH_SHORT).show();
         showProgress(false);

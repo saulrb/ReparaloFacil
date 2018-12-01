@@ -2,40 +2,49 @@ package com.facil.reparalo.reparalofacil.models;
 
 public class UserModel {
 
-    private String email;
-    private String password;
-    private String username;
-    private String address;
+    private Details user;
 
-    public String getEmail() {
-        return email;
+    public Details getUser() {
+        return user;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUser(Details user) {
+        this.user = user;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public class Details {
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+        private String email;
+        private String password;
+        private String username;
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+        public String getEmail() {
+            return email;
+        }
 
-    public String getAddress() {
-        return address;
-    }
+        public Details setEmail(String email) {
+            this.email = email;
+            return this;
+        }
 
-    public void setAddress(String address) {
-        this.address = address;
+        public String getPassword() {
+            return password;
+        }
+
+        public Details setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public Details setUsername(String username) {
+            this.username = username;
+            return this;
+        }
     }
 }
+

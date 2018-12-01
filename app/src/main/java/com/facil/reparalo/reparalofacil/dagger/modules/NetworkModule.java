@@ -1,6 +1,7 @@
 package com.facil.reparalo.reparalofacil.dagger.modules;
 
 import com.facil.reparalo.reparalofacil.network.services.AuthenticationService;
+import com.facil.reparalo.reparalofacil.network.services.UsersService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,6 +19,11 @@ public class NetworkModule  {
     @Provides
     public AuthenticationService providesAuthenticationService(Retrofit retrofit){
         return retrofit.create(AuthenticationService.class);
+    }
+
+    @Provides
+    public UsersService providesUserService(Retrofit retrofit){
+        return retrofit.create(UsersService.class);
     }
 
     @Provides
