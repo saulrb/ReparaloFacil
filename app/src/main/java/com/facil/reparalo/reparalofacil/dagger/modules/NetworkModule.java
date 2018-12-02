@@ -31,7 +31,7 @@ public class NetworkModule  {
                              GsonConverterFactory gsonConverterFactory){
         return new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://rails-5-saulrb.c9users.io:8080")
+                .baseUrl("https://rhe-api.herokuapp.com")
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .build();

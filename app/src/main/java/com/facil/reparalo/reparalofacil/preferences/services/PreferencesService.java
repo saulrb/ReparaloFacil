@@ -16,6 +16,18 @@ public class PreferencesService {
         return this;
     }
 
+    public PreferencesService saveAuthenticationToken(String token){
+        this.context.getSharedPreferences(PREFERENCE_FILE_KEY,Context.MODE_PRIVATE)
+            .edit()
+            .putString("4",token)
+            .apply();
+        return this;
+    }
+
+    public String getAuthenticationToken(){
+        return this.context.getSharedPreferences(PREFERENCE_FILE_KEY,Context.MODE_PRIVATE).getString("4",null);
+    }
+
     public PreferencesService saveCredentials(CredencialsModel credencials){
         this.context.getSharedPreferences(PREFERENCE_FILE_KEY,Context.MODE_PRIVATE)
                 .edit()

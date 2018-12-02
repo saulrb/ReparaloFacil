@@ -134,12 +134,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void handleResponse(AccessTokenModel tokenModel){
-        Toast.makeText(this,"Token:" + tokenModel.getJwt() ,Toast.LENGTH_SHORT).show();
+        preferencesService.saveAuthenticationToken(tokenModel.getJwt());
         showProgress(false);
     }
 
     private void handleError(Throwable throwable){
-        Toast.makeText(this,"Error in accessing JSON" + throwable.getLocalizedMessage() ,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Error in accessing " + throwable.getLocalizedMessage() ,Toast.LENGTH_SHORT).show();
         showProgress(false);
     }
 
