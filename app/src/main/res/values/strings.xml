@@ -18,6 +18,15 @@
     <string name="error_field_required">Este campo es requerido</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!-- String regarding to people data tabbed activity -->
+
+    <string name="person_name">Nombre</string>
+    <string name="person_last_name">Apellidos</string>
+    <string name="person_phone">Telefono</string>
+    <string name="person_zip_code">Código Postal</string>
+    <string name="person_address_location">Colonia o Fraccionamiento</string>
+    <string name="persona_address_street">Calle </string>
+    <string name="persona_address_number">Numero</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -75,4 +84,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_persona">PersonaActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

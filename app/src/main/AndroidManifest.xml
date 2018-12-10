@@ -35,6 +35,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.facil.reparalo.reparalofacil.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.PersonActivity"
+            android:label="@string/title_activity_persona"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

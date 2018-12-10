@@ -3,6 +3,7 @@ package com.facil.reparalo.reparalofacil.dagger.components;
 
 import com.facil.reparalo.reparalofacil.dagger.modules.NetworkModule;
 import com.facil.reparalo.reparalofacil.network.services.AuthenticationService;
+import com.facil.reparalo.reparalofacil.network.services.PersonService;
 import com.facil.reparalo.reparalofacil.network.services.UsersService;
 
 import dagger.Component;
@@ -13,4 +14,6 @@ public interface NetworkComponent {
     AuthenticationService getAuthenticationService();
 
     UsersService getUserService();
+
+    PersonService getPersonService();
 }

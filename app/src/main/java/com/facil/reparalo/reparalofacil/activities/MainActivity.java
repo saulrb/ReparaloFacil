@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void handleResponse(AccessTokenModel tokenModel){
         preferencesService.saveAuthenticationToken(tokenModel.getJwt());
         showProgress(false);
+        Intent intent = new Intent(MainActivity.this,PersonActivity.class);
+        startActivity(intent);
     }
 
     private void handleError(Throwable throwable){
